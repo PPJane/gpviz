@@ -13,3 +13,5 @@ LinkingTo: StanHeaders (>= 2.17.2), rstan (>= 2.17.3), BH (>= 1.66.0-1), Rcpp (>
 SystemRequirements: GNU make
 NeedsCompilation: yes
 RoxygenNote: 6.0.1
+URL: http://github.com/PPJane/gpviz
+BugReports: http://github.com/PPJane/gpviz/issues
