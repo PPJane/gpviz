@@ -9,7 +9,6 @@
 #' @export gpslope
 #' @export gpapply
 #' @import grid
-#' @import Rcpp
 #' @import rstantools
 #' @import dplyr
 #' @import ggplot2
@@ -17,6 +16,7 @@
 #' @import rstan
 #' @import rstantools
 #' @import stringr
+#' @importFrom Rcpp sourceCpp
 #' @importFrom magrittr %>%
 #' @importFrom rstan sampling
 #'
