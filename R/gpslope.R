@@ -174,5 +174,5 @@ gpslope <- function(data, x_, y_, trainingpect = 0.1, seed = 123,
           legend.key = element_rect(size = 5),
           legend.key.size = unit(3, 'lines'))
 
-  return(list(stanfit = pred_fit, gppred = p1, gpCI = p2, gpDensity = p3, argVal = argVal))
+  return(list(stanfit = pred_fit, gppred = p1, gpCI = p2, gpDensity = p3, argVal = arg))
 }
