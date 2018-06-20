@@ -97,7 +97,6 @@ gpslope <- function(data, x_, y_, trainingpect = 0.1, seed = 123,
     ggtitle(paste0("Gaussian Process and the Confidence Interval of \nIts Prediction's First Derivative at Confidence Level of ",
                   sprintf('%i%%', conf * 100),
                   '\nFor Data Set "',
-                  # arg$data)) +
                   ifelse(exists("argVal"), argVal$data, arg$data), '"')) +
     theme(axis.title.x = element_blank(),
           axis.title.y = element_text(size = 16, angle = 0, vjust = 0.5),
@@ -175,5 +174,5 @@ gpslope <- function(data, x_, y_, trainingpect = 0.1, seed = 123,
           legend.key = element_rect(size = 5),
           legend.key.size = unit(3, 'lines'))
 
-  return(list(pred_fit, p1, p2, p3, arg))
+  return(list(stanfit = pred_fit, gppred = p1, gpCI = p2, gpDensity = p3, argVal = argVal))
 }

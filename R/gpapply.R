@@ -35,9 +35,9 @@ gpapply <- function(data, x_lst, y_, trainingpect = 0.1, seed = 123,
                      dn,
                      rho_alpha, rho_beta, alpha_mean, alpha_sd, sigma_mean, sigma_sd)
 
-    gpPlot <- tmplist[[2]]
-    gpSlopeCI <- tmplist[[3]]
-    gpSlopeDen <- tmplist[[4]]
+    gpPlot <- tmplist[['gppred']]
+    gpSlopeCI <- tmplist[['gpCI']]
+    gpSlopeDen <- tmplist[['gpDensity']]
 
     pdf(file = paste0("./gp_CI_", argVal$data, "_",
                       ifelse(is.numeric(argVal$conf), argVal$conf, formals(gpviz)$conf), "_",
