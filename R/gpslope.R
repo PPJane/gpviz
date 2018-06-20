@@ -49,7 +49,12 @@ gpslope <- function(data, x_, y_, trainingpect = 0.1, seed = 123,
 
   pred_data <- list(N1 = N1, N2 = N2, x1 = x1, y1 = y1, x2 = x2, y2o = y2o, x2o = x2o, x_ = x_, y_ = y_, rho_alpha, rho_beta, alpha_mean, alpha_sd, sigma_mean, sigma_sd)
 
-  pred_fit <- rstan::stan(file = paste0(system.file(package = 'gpviz'), '/src/stan_files/predict_gauss.stan'), data = pred_data, iter = iter, chains = chains)
+  pred_fit <- rstan::stan(file = paste(system.file(package = 'gpviz'),
+                                       '/include/stan_files/predict_gauss.stan',
+                                       sep = '/'),
+                          data = pred_data,
+                          iter = iter,
+                          chains = chains)
   print(pred_fit, pars = c('alpha', 'rho', 'sigma'))
 
   f2 <- rstan::extract(pred_fit)$f2
