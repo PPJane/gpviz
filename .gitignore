@@ -1,5 +1,0 @@
-.Rproj.user
-.Rbuildignore
-src/*.o
-src/*.so
-src/*.dll
