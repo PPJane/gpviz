@@ -422,7 +422,7 @@ public:
             current_statement_begin__ = 77;
             delta = double(0);
             stan::math::fill(delta,DUMMY_VAR__);
-            stan::math::assign(delta,1.0000000000000001e-09);
+            stan::math::assign(delta,1.0000000000000001e-009);
             current_statement_begin__ = 78;
             validate_non_negative_index("mu", "N1", N1);
             mu = vector_d(static_cast<Eigen::VectorXd::Index>(N1));

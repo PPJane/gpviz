@@ -29,7 +29,7 @@ gpapply <- function(data, x_lst, y_, trainingpect = 0.1, seed = 123,
   argVal <<- as.list(sys.call())
 
   foo <- function(feature){
-    tmplist <- gpviz(data, feature, y_, trainingpect, seed,
+    tmplist <- gpslope(data, feature, y_, trainingpect, seed,
                      iter, chains,
                      conf, condition1, condition2,
                      dn,
@@ -40,7 +40,7 @@ gpapply <- function(data, x_lst, y_, trainingpect = 0.1, seed = 123,
     gpSlopeDen <- tmplist[['gpDensity']]
 
     pdf(file = paste0("./gp_CI_", argVal$data, "_",
-                      ifelse(is.numeric(argVal$conf), argVal$conf, formals(gpviz)$conf), "_",
+                      ifelse(is.numeric(argVal$conf), argVal$conf, formals(gpslope)$conf), "_",
                       feature, "_", argVal$y_, ".pdf"),
         height = 20, width = 18, paper = "letter")
     grid::grid.newpage()

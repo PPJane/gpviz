@@ -19,7 +19,7 @@
 #' @param sigma_mean Prior distribution of sigma is set to normal distribution with sigma ~ normal(sigma_mean, sigma_sd), default value is normal(0, 1)
 #' @param sigma_sd Prior distribution of sigma is set to normal distribution with sigma ~ normal(sigma_mean, sigma_sd), default value is normal(0, 1)
 #' @return A list consiting of the Stan fit object, three ggplot plot objects and the user-specified argument values
-#' @examples resultlst <- gpviz(data = hsbReport_cleaned, x_ = 'deposit_asset_ratio', y_ = 'loss_asset_ratio', seed = 123456, iter = 2000, conf = 0.95, condition1 = '>0', condition2 = NULL)
+#' @examples resultlst <- gpslope(data = hsbReport_cleaned, x_ = 'deposit_asset_ratio', y_ = 'loss_asset_ratio', seed = 123456, iter = 2000, conf = 0.95, condition1 = '>0', condition2 = NULL)
 
 gpslope <- function(data, x_, y_, trainingpect = 0.1, seed = 123,
                    iter = 100, chains = 4,
@@ -94,10 +94,7 @@ gpslope <- function(data, x_, y_, trainingpect = 0.1, seed = 123,
                                   'prediction' = 'pink',
                                   'realization' = 'grey')) +
     ylab(gsub('_', '_\n', y_)) +
-    ggtitle(paste0("Gaussian Process and the Confidence Interval of \nIts Prediction's First Derivative at Confidence Level of ",
-                  sprintf('%i%%', conf * 100),
-                  '\nFor Data Set "',
-                  ifelse(exists("argVal"), argVal$data, arg$data), '"')) +
+    ggtitle("Gaussian Process Regression and Prediction") +
     theme(axis.title.x = element_blank(),
           axis.title.y = element_text(size = 16, angle = 0, vjust = 0.5),
           title = element_text(size = 16, angle = 0, hjust = 0.5, vjust = 0.5),
@@ -136,7 +133,11 @@ gpslope <- function(data, x_, y_, trainingpect = 0.1, seed = 123,
 
   p2 <- p2 +
     stat_smooth(aes(x, y = low, color = "low"), method = 'lm', formula = y ~ poly(x,15), size = 1.5, se = FALSE, alpha = 0.01) +
-    stat_smooth(aes(x, y = high, color = 'high'), method = 'lm', formula = y ~ poly(x,15), size = 1.5, se = FALSE, alpha = 0.01)
+    stat_smooth(aes(x, y = high, color = 'high'), method = 'lm', formula = y ~ poly(x,15), size = 1.5, se = FALSE, alpha = 0.01) +
+    ggtitle(paste0("Confidence Interval of Gaussian Process Prediction's \nFirst Derivative at Confidence Level of ",
+                   sprintf('%i%%', conf * 100),
+                   '\nFor Data Set "',
+                   ifelse(exists("argVal"), argVal$data, arg$data), '"'))
 
   for (i in sample(1:nrow(f2), 10)) {
     p1 <- p1 +
@@ -172,7 +173,8 @@ gpslope <- function(data, x_, y_, trainingpect = 0.1, seed = 123,
           legend.position = 'right',
           legend.text = element_text(size = 12),
           legend.key = element_rect(size = 5),
-          legend.key.size = unit(3, 'lines'))
+          legend.key.size = unit(3, 'lines')) +
+    ggtitle("Density Estimation of Gaussian Process Prediction's First Derivative")
 
   return(list(stanfit = pred_fit, gppred = p1, gpCI = p2, gpDensity = p3, argVal = arg))
 }
